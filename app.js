@@ -40,17 +40,17 @@ app.get('/new/*', function(req, res){
     }
 });
 
-app.get('/:id', function(req, res){
-    var id = req.params.id;
-    MongoClient.connect(dbUrl, function(err, db){
-       if (err) throw err;
-       db.collection('urls').find({
-           id: +id
-       }).toArray(function(err,data){
-        if(err) throw err;
-        res.redirect(data[0].url);
-    });
-    })
-});
+// app.get('/:id', function(req, res){
+//     var id = req.params.id;
+//     MongoClient.connect(dbUrl, function(err, db){
+//       if (err) throw err;
+//       db.collection('urls').find({
+//           id: +id
+//       }).toArray(function(err,data){
+//         if(err) throw err;
+//         res.redirect(data[0].url);
+//     });
+//     })
+// });
 
 app.listen(process.env.PORT || 8080);
