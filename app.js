@@ -4,7 +4,7 @@ var path = require("path");
 
 var MongoClient = mongodb.MongoClient;
 var dbUrl = 'mongodb://mickey:123456@ds145380.mlab.com:45380/freecode';
-var idIndex = 0;
+var idIndex = 2;
 var app = express();
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -42,6 +42,7 @@ app.get('/new/*', function(req, res){
 
 app.get('/:id', function(req, res){
     var id = req.params.id;
+    console.log(id);
     if(/\d+/.test(id)){
          MongoClient.connect(dbUrl, function(err, db){
             if (err) throw err;
@@ -49,7 +50,7 @@ app.get('/:id', function(req, res){
                   id: +id
               }).toArray(function(err,data){
                 if(err) throw err;
-                if(data[0] & data[0].url){
+                if(data[0] && data[0].url){
                     res.redirect(data[0].url);   
                 }
             });
